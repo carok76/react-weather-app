@@ -1,38 +1,127 @@
 .App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
   display: flex;
+  text-align: center;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+  justify-content: space-between;
+  background: white;
+  max-width: 600px;
+  margin: 40px auto;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 30px 50px rgba(65, 50, 100, 0.08);
+  opacity: 0.8;
+}
+
+h1 {
+  font-size: 40px;
+  font-weight: 900;
+}
+
+.input-text {
+  background-color: #f9f7fe;
+  border: none;
+  color: rgba(39, 33, 66, 0.4);
+  font-size: 16px;
+  padding: 20px;
+  width: 75%;
+  border-radius: 6px;
+}
+
+.input-button {
+  margin-left: 5px;
+  font-size: 16px;
+  font-weight: bold;
+  background-color: white;
+  color: black;
+  border: none;
+  padding: 20px;
+  line-height: 1;
+  border-radius: 5px;
+  border-style: solid;
+}
+
+.input-button:hover {
+  cursor: pointer;
+  background-color: black;
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.current-weather-layout {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: black dotted;
+  border-top: black dotted;
+  }
+
+.current-city-temp {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-top: 20px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.current-temp {
+  font-size: 38px;
+  display: flex;
+  align-items: center;
+}
+
+.current-temp img {
+  width: 60px;
+  margin-left: 10px;
+}
+
+.current-city {
+  font-size: 38px;
+  font-weight: 900;
+  margin: 0;
+}
+
+.current-details {
+  color: black;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+}
+  
+.current-details strong {
+  color: #4C1310;
+}
+
+li {
+  list-style: none;
+}
+
+.weather-forecast {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 20px;
+}
+
+.weather-forecast ul {
+  margin: 0;
+  padding: 0;          
+  list-style: none;   
+}
+
+.weather-forecast li {
+  border-left: black dotted;
+  border-right: black dotted;
+  padding: 0 20px 0 20px;
+}
+
+.current-details {
+  color: black;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+}
+  
+.current-details strong {
+  color: black;
+}
+
+.footer {
+  font-size: 10px;
 }

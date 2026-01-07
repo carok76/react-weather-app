@@ -1,25 +1,23 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import Search from "./Search";
+import Weather from "./Weather";
+import Forecast from "./Forecast";
+import "./App.css";
 
-function App() {
+export default function App() {
+  let [city, setCity] = useState("");
+
+  function handleSearch(inputCity) {
+    setCity(inputCity);
+  }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>Weather App</h1>
+      <Search onSearch={handleSearch} />
+      <Weather city={city} />
+      <Forecast />
+      <p className="footer">This project was coded by <a href="https://www.linkedin.com/in/carolin-krahmer-94661399/" target="_blank">Carolin Krahmer</a> and is on  <a href="https://github.com/carok76/Weather-App" target="_blank">GitHub</a> and hosted on <a href="https://frolicking-bubblegum-45cfd5.netlify.app/" target="_blank">Netlify</a>.</p>
     </div>
   );
 }
-
-export default App;
