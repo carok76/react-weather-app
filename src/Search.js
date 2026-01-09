@@ -6,10 +6,9 @@ export default function Search({ onSearch }) {
 
   function handleSubmit(event) {
     event.preventDefault();
-    if (input.trim()) {
-      onSearch(input.trim());
+    const trimmed = input.trim();
+    if (trimmed) onSearch(trimmed);
     }
-  }
 
   return (
     <div className="SearchForm">

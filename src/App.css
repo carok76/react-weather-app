@@ -1,3 +1,10 @@
+body {
+  background-image: url("\un-liu-ze8A0bmn5T4-unsplash.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
 .App {
   display: flex;
   text-align: center;
@@ -9,7 +16,7 @@
   padding: 30px;
   border-radius: 10px;
   box-shadow: 0 30px 50px rgba(65, 50, 100, 0.08);
-  opacity: 0.8;
+  opacity: 0.9;
 }
 
 h1 {
@@ -67,7 +74,7 @@ h1 {
   align-items: center;
 }
 
-.current-temp img {
+.current-details img {
   width: 60px;
   margin-left: 10px;
 }
@@ -122,6 +129,7 @@ li {
   color: black;
 }
 
-.footer {
+footer {
   font-size: 10px;
+  margin-top: 20px;
 }
