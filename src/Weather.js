@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import FormattedDate from "./FormattedDate";
+import WeatherIcon from "./WeatherIcon.js";
+import WeatherUnit from "./WeatherUnit.js";
 import "./App.css";
 
 export default function Weather(props) {
@@ -28,8 +31,10 @@ export default function Weather(props) {
         description: response.data.weather[0].description,
         humidity: response.data.main.humidity,
         wind: response.data.wind.speed,
-        icon: `https://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`,
+        icon: response.data.weather[0].icon,
         city: response.data.name,
+        coordinates: response.data.coord,
+        date: new Date(response.data.dt * 1000),
         })
       })
       .catch((error) => {
@@ -40,9 +45,9 @@ export default function Weather(props) {
         if (cancelled) return;
         setLoading(false);
       });
-      return () => {
-      cancelled = true;
-    };
+    return () => {
+    cancelled = true;
+  };
   }, [props.city]);
 
   if (!props.city) return <p>Please enter a city.</p>;
@@ -54,16 +59,16 @@ export default function Weather(props) {
     <div className="current-weather"> 
     <ul className="current-weather-layout">
       <div className="current-city-temp">
-      <li className="current-city">{data.city}</li>
-      <li className="current-temp">Temperature: {Math.round(data.temperature)}°C</li>
-      <li className="current-temp">
-        <img src={data.icon} alt={data.description} />
-      </li>
+        <li className="current-city">{data.city}</li>
+        <li className="current-date-description">
+          <FormattedDate date={data.date} />, {data.description}
+        </li>
+        <li className="current-details">
+          Humidity: {data.humidity}%, Wind: {data.wind} km/h
+        </li>
       </div>
-      <div className="current-details">
-      <li className="description">Description: {data.description}</li>
-      <li className="humidity">Humidity: {data.humidity}%</li>
-      <li className="wind">Wind: {data.wind} km/h</li>
+      <div className="current-temperature">
+        <li className="current-temp"><WeatherIcon code={data.icon} size={72} color="#000" /> <WeatherUnit celsius={data.temperature} /></li>
       </div>
     </ul>
     </div>
