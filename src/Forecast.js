@@ -17,8 +17,39 @@ export default function Forecast(props) {
 
     axios.get(apiurl).then((response) => {
         const list = response.data.list;
-        const midday = list.filter((item) => item.dt_txt.includes("12:00:00"));
-        setDays(midday.slice(0, 5));
+
+        const byDate = new Map();
+        list.forEach((item) => {
+        const dateKey = item.dt_txt.slice(0, 10); // z.B. "2026-01-12"
+        if (!byDate.has(dateKey)) byDate.set(dateKey, []);
+        byDate.get(dateKey).push(item);
+      });
+
+        const daily = Array.from(byDate.entries())
+        .map(([dateKey, items]) => {
+          let min = Infinity;
+          let max = -Infinity;
+
+          items.forEach((it) => {
+            min = Math.min(min, it.main.temp_min);
+            max = Math.max(max, it.main.temp_max);
+          });
+
+          const noon = items.find((it) => it.dt_txt.includes("12:00:00"));
+          const ref = noon || items[0];
+
+          return {
+            dateKey,
+            dt: ref.dt, // für Wochentag
+            tempMin: Math.round(min),
+            tempMax: Math.round(max),
+            icon: ref.weather?.[0]?.icon,
+          };
+        })
+        .sort((a, b) => a.dt - b.dt) // chronologisch
+        .slice(0, 5); // 5 Tage
+
+        setDays(daily);
         setLoaded(true);
     });
   }, [props.coordinates]);
@@ -28,10 +59,10 @@ export default function Forecast(props) {
     return (
         <div className="weather-forecast">
             <div className="row">
-                {days.map((dayData) => (
-                <div className="col" key={dayData.dt}>
-                    <ForecastDay data={dayData} />
-                </div>
+                {days.map((day) => (
+            <div className="col" key={day.dateKey}>
+                <ForecastDay day={day} />
+            </div>
                 ))}
             </div>
         </div>
