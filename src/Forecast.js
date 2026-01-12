@@ -1,64 +1,38 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import WeatherIcon from "./WeatherIcon";
+import axios from "axios";
 import "./App.css";
+import ForecastDay from "./ForecastDay";
 
-export default function Forecast ({props}) {
+export default function Forecast(props) {
+    const [loaded, setLoaded] = useState(false);
+    const [days, setDays] = useState([]);
+
+  useEffect(() => {
+    if (!props.coordinates) return;
+
+    let apikey = "be81f193e065bf5feb2d944c7336968b";
+    let {lat, lon} = props.coordinates;
+    let apiurl = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${apikey}&units=metric`;
+
+    axios.get(apiurl).then((response) => {
+        const list = response.data.list;
+        const midday = list.filter((item) => item.dt_txt.includes("12:00:00"));
+        setDays(midday.slice(0, 5));
+        setLoaded(true);
+    });
+  }, [props.coordinates]);
+
+    if (!loaded) return <p>Loading forecast...</p>;
 
     return (
         <div className="weather-forecast">
-            <div className="forecast-day">
-                <ul>
-                    <li>Mon</li>
-                    <li><img 
-                        src="https://ssl.gstatic.com/onebox/weather/64/sunny.png"
-                        alt="sunny"
-                        className="forecast-icon"
-                    /></li>
-                    <li>20°C</li>
-                </ul>
-            </div>
-            <div className="forecast-day">
-                <ul>
-                    <li>Tue</li>
-                    <li><img 
-                        src="https://ssl.gstatic.com/onebox/weather/64/sunny.png"
-                        alt="sunny"
-                        className="forecast-icon"
-                    /></li>
-                    <li>20°C</li>
-                </ul>
-            </div>
-            <div className="forecast-day">
-                <ul>
-                    <li>Wed</li>
-                    <li><img 
-                        src="https://ssl.gstatic.com/onebox/weather/64/sunny.png"
-                        alt="sunny"
-                        className="forecast-icon"
-                    /></li>
-                    <li>20°C</li>
-                </ul>
-            </div>
-                        <div className="forecast-day">
-                <ul>
-                    <li>Thu</li>
-                    <li><img 
-                        src="https://ssl.gstatic.com/onebox/weather/64/sunny.png"
-                        alt="sunny"
-                        className="forecast-icon"
-                    /></li>
-                    <li>20°C</li>
-                </ul>
-            </div>
-                        <div className="forecast-day">
-                <ul>
-                    <li>Fri</li>
-                    <li><img 
-                        src="https://ssl.gstatic.com/onebox/weather/64/sunny.png"
-                        alt="sunny"
-                        className="forecast-icon"
-                    /></li>
-                    <li>20°C</li>
-                </ul>
+            <div className="row">
+                {days.map((dayData) => (
+                <div className="col" key={dayData.dt}>
+                    <ForecastDay data={dayData} />
+                </div>
+                ))}
             </div>
         </div>
     );

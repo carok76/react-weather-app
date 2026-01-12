@@ -27,7 +27,8 @@ h1 {
 .input-text {
   background-color: #f9f7fe;
   border: none;
-  color: rgba(39, 33, 66, 0.4);
+  color: #1D426C;
+  opacity: 0.4;
   font-size: 16px;
   padding: 20px;
   width: 75%;
@@ -39,17 +40,18 @@ h1 {
   font-size: 16px;
   font-weight: bold;
   background-color: white;
-  color: black;
+  color: #1D426C;
   border: none;
   padding: 20px;
   line-height: 1;
   border-radius: 5px;
   border-style: solid;
+  border-color: #1D426C;
 }
 
 .input-button:hover {
   cursor: pointer;
-  background-color: black;
+  background-color: #1D426C;
   color: white;
 }
 
@@ -57,8 +59,8 @@ h1 {
   display: flex;
   justify-content: space-around;
   align-items: center;
-  border-bottom: black dotted;
-  border-top: black dotted;
+  border-bottom: #1D426C solid 1px;
+  border-top: #1D426C solid 1px;
   padding: 20px;
   margin-bottom: 20px;
   }
@@ -95,7 +97,7 @@ h1 {
 }
   
 .current-details strong {
-  color: #4C1310;
+  color: #1D426C;
 }
 
 li {
@@ -110,32 +112,23 @@ li {
 }
 
 .weather-forecast {
-  display: flex;
-  justify-content: space-around;
+  text-align: center;
   margin-top: 20px;
 }
 
-.weather-forecast ul {
-  margin: 0;
-  padding: 0;          
-  list-style: none;   
+.weather-forecast-temps-min {
+  opacity: 0.6;
+  margin-left: 5px;
 }
 
-.weather-forecast li {
-  border-left: black dotted;
-  border-right: black dotted;
-  padding: 0 20px 0 20px;
+.weather-forecast .row {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 12px;
 }
 
-.current-details {
-  color: black;
-  font-size: 16px;
-  font-weight: 400;
-  line-height: 24px;
-}
-  
-.current-details strong {
-  color: black;
+.weather-forecast .col {
+  text-align: center;
 }
 
 footer {

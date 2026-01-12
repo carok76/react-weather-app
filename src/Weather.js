@@ -3,6 +3,7 @@ import axios from "axios";
 import FormattedDate from "./FormattedDate";
 import WeatherIcon from "./WeatherIcon.js";
 import WeatherUnit from "./WeatherUnit.js";
+import Forecast from "./Forecast.js";
 import "./App.css";
 
 export default function Weather(props) {
@@ -71,6 +72,7 @@ export default function Weather(props) {
         <li className="current-temp"><WeatherIcon code={data.icon} size={72} color="#000" /> <WeatherUnit celsius={data.temperature} /></li>
       </div>
     </ul>
+    <Forecast coordinates={data.coordinates} />
     </div>
     );
   }
