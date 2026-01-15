@@ -40,7 +40,7 @@ export default function Weather(props) {
       })
       .catch((error) => {
         if (cancelled) return;
-        setError("Fehler beim Abrufen der Wetterdaten.");
+        setError("Could not retrieve weather data. Please change city.");
       })
       .finally(() => {
         if (cancelled) return;
